@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .confirmation-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.5s ease; /* Add a smooth transition effect */
+        }
+
+        button {
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .full-width-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #gifContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .gif {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <title>Will you go out with me? :D</title>
+</head>
+<body>
+
+    <div class="container">
+        <img 
+            src="https://cdn.shopify.com/s/files/1/0271/1181/7300/files/01.jpg?v=1570177076"
+            alt="milk"
+            class="full-width-image"
+        />
+
+        <div class="confirmation-box" id="confirmationBox">
+            <h2>Will you go out with me? :D</h2>
+            <button onclick="answer('Yes')">Yes</button>
+            <button onclick="moveBox()">No</button>
+        </div>
+
+        <div id="gifContainer">
+            <img src="https://media0.giphy.com/media/JRsQiAN79bPWUv43Ko/source.gif" alt="playing gif" class="gif" id="gifImage">
+        </div>
+    </div>
+
+    <script>
+        function answer(choice) {
+            alert('You chose: ' + choice);
+            var gifContainer = document.getElementById('gifContainer');
+            gifContainer.style.display = 'block'; // Display the GIF container
+        }
+
+        var corners = [
+            { x: '50%', y: '50%' }, // Middle
+            { x: '0%', y: '0%' },   // Top Left
+            { x: '100%', y: '0%' },  // Top Right
+            { x: '0%', y: '100%' },  // Bottom Left
+            { x: '100%', y: '100%' } // Bottom Right
+        ];
+
+        var currentCornerIndex = 0;
+
+        function moveBox() {
+            var confirmationBox = document.getElementById('confirmationBox');
+
+            // Set the transform to move to the current corner
+            confirmationBox.style.transform = 'translate(' + corners[currentCornerIndex].x + ', ' + corners[currentCornerIndex].y + ')';
+            
+            // Increment the corner index for the next move
+            currentCornerIndex = (currentCornerIndex + 1) % corners.length;
+        }
+    </script>
+</body>
+</html>
